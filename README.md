@@ -1,9 +1,9 @@
 # NetExplore
-Multi-threaded ICMP Host-Discovery Tool
+### Scans your network for connected devices with ICMP packets
 ![](netexplore.gif)
 
 
 
 
-## Usage:  
+* Usage:  
 `python netdiscover <iprange> <threads>`
