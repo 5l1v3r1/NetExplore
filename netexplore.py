@@ -65,7 +65,7 @@ class ProgrssBar:
             self.speed = 0
             self.__fill = 0
             self.max = max_value
-            self.value = 0.0
+            self.value = 0
             self.percent = 0
             self.unit = unit
 
@@ -134,9 +134,8 @@ if __name__ == '__main__':
     else:
         t = Thread(daemon=True, target=perform_scan)
         t.start()
-        sleep(0.1)
         PB.show_progress()
-        sleep(0.1)
+        sleep(0.2)
         t.join()
         stop = time()
         time_spent = str((stop - start)).split(".")[0]
