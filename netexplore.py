@@ -1,6 +1,7 @@
 from ipaddress import IPv4Network
 from queue import Queue
 from threading import Thread
+from colorama import init, Fore, Style
 import subprocess
 from sys import exit, argv
 from time import sleep, time
@@ -124,14 +125,11 @@ def perform_scan():
 
 
 if __name__ == '__main__':
-    if len(argv) < 2:
-        print("[+] You forgot to add an IP range")
-        print("[+] Usage: python netexplore.py <iprange> <threads>")
-        exit()
-    elif len(argv) < 3:
-        print("[+] You forgot to add the amount of threads")
-        print("[+] Usage: python netexplore.py <iprange> <threads>")
-    else:
+    init() # init colorama
+    
+    try:
+        str(argv[1]), int(argv[2]) # test if arg types are valid and exist
+        
         t = Thread(daemon=True, target=perform_scan)
         t.start()
         PB.show_progress()
@@ -140,3 +138,6 @@ if __name__ == '__main__':
         stop = time()
         time_spent = str((stop - start)).split(".")[0]
         print("\n[+] Scan time: %s seconds" % time_spent)
+    except (IndexError, TypeError):
+        print(Fore.RED + "[!] Usage: python netexplore.py <iprange> <threads>" + Style.RESET_ALL)
+        exit(1)
